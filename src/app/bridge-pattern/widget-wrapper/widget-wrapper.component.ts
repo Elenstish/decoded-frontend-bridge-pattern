@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, ContentChild, Input} from '@angular/core';
+
+import {Widget} from "../widgets/widget.interface";
+import {WIDGET} from "../widgets/widget.token";
 
 @Component({
   selector: 'app-widget-wrapper',
@@ -6,6 +9,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./widget-wrapper.component.css']
 })
 export class WidgetWrapperComponent {
+  @ContentChild(WIDGET as any, { static: true })
+  widget: Widget;
 
-  public onRefresh(): void {}
+  @Input()
+  title: string = '';
+
+  public onRefresh(): void {
+    this.widget.refresh();
+  }
 }
